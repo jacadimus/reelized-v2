@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reelized — The Future of Storytelling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #0f0e17;
+    --bg-card: #141420;
+    --gold: #c9a84c;
+    --gold-light: #e4d5a0;
+    --gold-dim: #8a7535;
+    --text-primary: #e8e4d9;
+    --text-secondary: #9a968b;
+    --text-dim: #5a574f;
+    --accent-purple: #6e5fa0;
+    --accent-warm: #a0785e;
+    --border: rgba(201, 168, 76, 0.12);
+    --border-hover: rgba(201, 168, 76, 0.25);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 24px 48px; display: flex; align-items: center; justify-content: space-between;
+    background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border); transition: all 0.4s ease;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500;
+    letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); text-decoration: none;
+  }
+  .nav-links { display: flex; align-items: center; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-size: 13px; font-weight: 400; letter-spacing: 0.08em; color: var(--text-secondary);
+    text-decoration: none; text-transform: uppercase; transition: color 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    padding: 10px 28px; background: transparent; border: 1px solid var(--gold-dim);
+    color: var(--gold) !important; border-radius: 2px; font-family: 'Inter', sans-serif;
+    font-size: 12px !important; letter-spacing: 0.15em !important; text-transform: uppercase;
+    cursor: pointer; transition: all 0.3s ease;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--bg-primary) !important; border-color: var(--gold); }
+  .hero {
+    min-height: 800px; display: flex; flex-direction: column; justify-content: center;
+    align-items: center; text-align: center; padding: 160px 48px 120px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(110,95,160,0.06) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 50% at 30% 60%, rgba(201,168,76,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--gold-dim); margin-bottom: 48px;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 8vw, 110px);
+    font-weight: 300; line-height: 1.05; letter-spacing: -0.01em; color: var(--text-primary);
+    max-width: 900px; margin-bottom: 40px;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    font-size: 17px; font-weight: 300; color: var(--text-secondary); max-width: 540px;
+    line-height: 1.7; margin-bottom: 56px;
+  }
+  .hero-cta-group { display: flex; align-items: center; gap: 24px; }
+  .btn-primary {
+    padding: 16px 44px; background: var(--gold); color: var(--bg-primary); border: none;
+    border-radius: 2px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-ghost {
+    padding: 16px 44px; background: transparent; color: var(--text-secondary);
+    border: 1px solid var(--border); border-radius: 2px; font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.3s ease; text-decoration: none;
+  }
+  .btn-ghost:hover { color: var(--gold-light); border-color: var(--border-hover); }
+  section { padding: 140px 48px; max-width: 1400px; margin: 0 auto; }
+  .section-divider { max-width: 1400px; margin: 0 auto; height: 1px; background: var(--border); }
+  .section-label {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--gold-dim); margin-bottom: 32px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300; line-height: 1.15; color: var(--text-primary); max-width: 700px;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .manifesto { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .manifesto .section-title { max-width: 800px; margin-bottom: 40px; }
+  .manifesto-body { font-size: 17px; font-weight: 300; color: var(--text-secondary); max-width: 600px; line-height: 1.8; }
+  .stats-strip { padding: 80px 48px; max-width: 1400px; margin: 0 auto; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .stat-item { background: var(--bg-primary); padding: 48px 40px; text-align: center; }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 12px;
+  }
+  .stat-label { font-size: 12px; font-weight: 400; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; }
+  .vision { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .vision-left .section-title { margin-bottom: 32px; }
+  .vision-text { font-size: 16px; font-weight: 300; color: var(--text-secondary); line-height: 1.8; margin-bottom: 24px; }
+  .vision-right { position: relative; }
+  .vision-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 48px; }
+  .vision-card-label {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold-dim); margin-bottom: 24px;
+  }
+  .pipeline-step { display: flex; align-items: center; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .pipeline-step:last-child { border-bottom: none; }
+  .step-number { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--gold-dim); min-width: 36px; }
+  .step-content h4 { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+  .step-content p { font-size: 13px; color: var(--text-dim); font-weight: 300; }
+  .products { text-align: center; }
+  .products .section-title { margin: 0 auto 72px; max-width: 600px; }
+  .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .product-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px;
+    padding: 64px 48px; text-align: left; transition: border-color 0.3s ease;
+    position: relative; overflow: hidden;
+  }
+  .product-card:hover { border-color: var(--border-hover); }
+  .product-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+    opacity: 0; transition: opacity 0.3s ease;
+  }
+  .product-card:hover::before { opacity: 1; }
+  .product-icon {
+    width: 48px; height: 48px; border: 1px solid var(--border); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 32px;
+  }
+  .product-icon svg { width: 20px; height: 20px; stroke: var(--gold-dim); fill: none; stroke-width: 1.5; }
+  .product-card h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 400;
+    color: var(--text-primary); margin-bottom: 8px;
+  }
+  .product-card .product-tag {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold-dim); margin-bottom: 24px; display: block;
+  }
+  .product-card p { font-size: 15px; font-weight: 300; color: var(--text-secondary); line-height: 1.7; margin-bottom: 32px; }
+  .product-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .product-features li { font-size: 13px; color: var(--text-dim); padding-left: 20px; position: relative; }
+  .product-features li::before {
+    content: ''; position: absolute; left: 0; top: 8px; width: 6px; height: 1px; background: var(--gold-dim);
+  }
+  .comparison { text-align: center; }
+  .comparison .section-title { margin: 0 auto 64px; }
+  .comparison-table {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 4px; overflow: hidden; text-align: left;
+  }
+  .comp-cell { background: var(--bg-primary); padding: 28px 32px; }
+  .comp-cell.header { background: var(--bg-card); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); }
+  .comp-cell.highlight { background: rgba(201, 168, 76, 0.04); }
+  .comp-cell.metric { font-size: 13px; color: var(--text-dim); font-weight: 400; }
+  .comp-cell .comp-value { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: var(--text-primary); }
+  .comp-cell.highlight .comp-value { color: var(--gold); }
+  .comp-cell .comp-detail { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+  .genres { text-align: center; }
+  .genres .section-title { margin: 0 auto 56px; }
+  .genres-row { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .genre-pill {
+    padding: 14px 32px; border: 1px solid var(--border); border-radius: 100px;
+    font-size: 13px; font-weight: 400; color: var(--text-secondary); letter-spacing: 0.04em;
+    transition: all 0.3s ease; cursor: default;
+  }
+  .genre-pill:hover { border-color: var(--gold-dim); color: var(--gold-light); }
+  .genre-pill.active { border-color: var(--gold-dim); color: var(--gold); background: rgba(201, 168, 76, 0.06); }
+  .cta-section { text-align: center; padding: 160px 48px; }
+  .cta-section .section-title { margin: 0 auto 24px; max-width: 700px; }
+  .cta-body { font-size: 17px; font-weight: 300; color: var(--text-secondary); max-width: 500px; margin: 0 auto 48px; line-height: 1.7; }
+  .email-form { display: flex; align-items: center; gap: 12px; max-width: 480px; margin: 0 auto; }
+  .email-form input {
+    flex: 1; padding: 16px 24px; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 2px; color: var(--text-primary); font-family: 'Inter', sans-serif;
+    font-size: 14px; outline: none; transition: border-color 0.3s ease;
+  }
+  .email-form input::placeholder { color: var(--text-dim); }
+  .email-form input:focus { border-color: var(--gold-dim); }
+  .email-form button {
+    padding: 16px 36px; background: var(--gold); color: var(--bg-primary); border: none;
+    border-radius: 2px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  .email-form button:hover { background: var(--gold-light); }
+  footer {
+    padding: 48px; max-width: 1400px; margin: 0 auto; border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 500;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-dim);
+  }
+  .footer-links { display: flex; gap: 32px; list-style: none; }
+  .footer-links a { font-size: 12px; color: var(--text-dim); text-decoration: none; letter-spacing: 0.04em; transition: color 0.3s ease; }
+  .footer-links a:hover { color: var(--text-secondary); }
+  .footer-copy { font-size: 11px; color: var(--text-dim); font-family: 'Space Mono', monospace; }
+  @media (max-width: 1024px) {
+    nav { padding: 20px 32px; }
+    section { padding: 100px 32px; }
+    .vision { grid-template-columns: 1fr; gap: 48px; }
+    .products-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .comparison-table { grid-template-columns: 1fr; }
+    .comp-cell.header { display: none; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .hero { padding: 140px 24px 100px; }
+    .hero-cta-group { flex-direction: column; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .email-form { flex-direction: column; }
+    .email-form input, .email-form button { width: 100%; }
+    footer { flex-direction: column; gap: 24px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .product-card { padding: 40px 32px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-logo">Reelized</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#authors">For Authors</a></li>
+    <li><a href="#audiences">For Audiences</a></li>
+    <li><a href="#contact" class="nav-cta">Join the Waiting List</a></li>
+  </ul>
+</nav>
+<section class="hero">
+  <p class="hero-eyebrow">The Future of Storytelling</p>
+  <h1>Every great book<br>deserves <em>a screen</em></h1>
+  <p class="hero-sub">Create AI-produced TV series and films from any novel. Watch them on the platform built for AI storytelling. One place to make it. One place to stream it.</p>
+  <div class="hero-cta-group">
+    <a href="#contact" class="btn-primary">Join the Waiting List</a>
+    <a href="#about" class="btn-ghost">Learn More</a>
+  </div>
+</section>
+<div class="section-divider"></div>
+<section class="manifesto" id="about">
+  <p class="section-label">About Reelized</p>
+  <h2 class="section-title">What ElevenLabs did for voice, <em>we're doing for screen</em></h2>
+  <p class="manifesto-body">Reelized is an AI-first platform where creators produce fully realised TV series and films from any story — and where audiences stream them. Think of it as a production studio and a streaming service in one. Over four million books are published every year. Less than 0.1% ever reach the screen. We exist to change that.</p>
+</section>
+<div class="section-divider"></div>
+<div class="stats-strip">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number">4M+</div>
+      <div class="stat-label">Books published per year</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">&lt;0.1%</div>
+      <div class="stat-label">Reach the screen</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">$100B+</div>
+      <div class="stat-label">Publishing market annually</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">$250B+</div>
+      <div class="stat-label">Streaming market annually</div>
+    </div>
+  </div>
+</div>
+<div class="section-divider"></div>
+<section class="products">
+  <p class="section-label">One Platform, Two Experiences</p>
+  <h2 class="section-title" style="max-width:700px;margin:0 auto 72px;">The AI production studio <em>and</em> the streaming service. Together.</h2>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>Produce</h3>
+      <span class="product-tag">Like ElevenLabs — for Screen</span>
+      <p>An AI-native production platform where authors and creators generate fully produced TV episodes and films from their stories. Upload a manuscript, adapt the screenplay, cast characters, build worlds, direct scenes — all powered by AI, all in one place.</p>
+      <ul class="product-features">
+        <li>AI screenplay adaptation from any novel</li>
+        <li>Character design, casting &amp; world-building</li>
+        <li>AI-generated video production</li>
+        <li>Human creative oversight at every stage</li>
+        <li>Building toward our own foundation model</li>
+      </ul>
+    </div>
+    <div class="product-card">
+      <div class="product-icon">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3>Stream</h3>
+      <span class="product-tag">Like Netflix — for AI Content</span>
+      <p>A curated streaming destination purpose-built for AI-produced TV series and films. The first platform where audiences discover stories that were never greenlit by traditional studios — now brought to life through AI and available to watch.</p>
+      <ul class="product-features">
+        <li>Curated library of AI-produced series &amp; films</li>
+        <li>Genre-first discovery (romance, fantasy, thriller)</li>
+        <li>Consumer subscription streaming</li>
+        <li>Revenue sharing back to authors &amp; IP holders</li>
+        <li>A home for stories the studios overlooked</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+<section class="vision" id="authors">
+  <div class="vision-left">
+    <p class="section-label">For Authors</p>
+    <h2 class="section-title">Your story. <em>Your screen.</em></h2>
+    <p class="vision-text">Authors upload their manuscript to Reelized and work with AI tools to create an adapted screenplay, select all the components — actors, locations, direction — and Reelized generates fully produced TV episodes or film, ready to stream on the platform.</p>
+    <p class="vision-text">No agents. No studios. No waiting years for permission. Just you, your story, and the tools to bring it to life. Today we orchestrate the best AI tools available. Tomorrow, we'll be the AI.</p>
+  </div>
+  <div class="vision-right">
+    <div class="vision-card">
+      <p class="vision-card-label">The Process</p>
+      <div class="pipeline-step"><span class="step-number">01</span><div class="step-content"><h4>Upload Story</h4><p>Upload your manuscript to begin</p></div></div>
+      <div class="pipeline-step"><span class="step-number">02</span><div class="step-content"><h4>Generate Script</h4><p>AI adapts your novel into a screenplay</p></div></div>
+      <div class="pipeline-step"><span class="step-number">03</span><div class="step-content"><h4>Refine Details</h4><p>Cast, locations, world-building &amp; tone</p></div></div>
+      <div class="pipeline-step"><span class="step-number">04</span><div class="step-content"><h4>AI Direction</h4><p>AI produces your film or series</p></div></div>
+      <div class="pipeline-step"><span class="step-number">05</span><div class="step-content"><h4>Review Output</h4><p>Watch, refine, and approve your work</p></div></div>
+      <div class="pipeline-step"><span class="step-number">06</span><div class="step-content"><h4>Publish</h4><p>Stream on the Reelized platform</p></div></div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+<section class="manifesto" id="audiences">
+  <p class="section-label">For Audiences</p>
+  <h2 class="section-title" style="max-width:800px;">Netflix was built for Hollywood. <em>Reelized is built for everything else.</em></h2>
+  <p class="manifesto-body">A streaming platform dedicated to AI-produced TV series and films. Discover stories from every genre — romance, fantasy, thriller, literary fiction — that traditional studios never greenlit. No more waiting years for your favourite book to be adapted. On Reelized, it already has been.</p>
+</section>
+<div class="section-divider"></div>
+<section class="comparison">
+  <p class="section-label">The Reelized Advantage</p>
+  <h2 class="section-title" style="max-width:600px;">What traditional studios <em>can't</em> do</h2>
+  <div class="comparison-table">
+    <div class="comp-cell header"></div>
+    <div class="comp-cell header">Traditional Studio</div>
+    <div class="comp-cell header" style="background:rgba(201,168,76,0.06);">Reelized</div>
+    <div class="comp-cell metric">Timeline</div>
+    <div class="comp-cell"><span class="comp-value">4.5 years</span><div class="comp-detail">Development to release</div></div>
+    <div class="comp-cell highlight"><span class="comp-value">8 months</span><div class="comp-detail">Rights to release</div></div>
+    <div class="comp-cell metric">Cost</div>
+    <div class="comp-cell"><span class="comp-value">$43–109M</span><div class="comp-detail">Minimum prestige production</div></div>
+    <div class="comp-cell highlight"><span class="comp-value">$136K–935K</span><div class="comp-detail">Full AI-assisted pipeline</div></div>
+    <div class="comp-cell metric">Accessibility</div>
+    <div class="comp-cell"><span class="comp-value">Gatekept</span><div class="comp-detail">Studio relationships required</div></div>
+    <div class="comp-cell highlight"><span class="comp-value">Open</span><div class="comp-detail">Any author, any story</div></div>
+    <div class="comp-cell metric">IP Adapted</div>
+    <div class="comp-cell"><span class="comp-value">&lt; 0.01%</span><div class="comp-detail">Of published books</div></div>
+    <div class="comp-cell highlight"><span class="comp-value">Unlimited</span><div class="comp-detail">Every story has a path</div></div>
+  </div>
+</section>
+<div class="section-divider"></div>
+<section class="vision" id="founder" style="align-items:center;">
+  <div class="vision-left">
+    <p class="section-label">Meet the Founder</p>
+    <h2 class="section-title"><em>Jack Williamson</em></h2>
+    <p class="vision-text">Reelized was founded by Jack Williamson, a published romance author and former entertainment industry executive with first-hand experience of writing stories that deserve a wider audience — and the barriers that stand between a finished manuscript and the screen.</p>
+    <p class="vision-text">Reelized is built from the author's perspective, not the studio's.</p>
+  </div>
+  <div class="vision-right">
+    <div class="vision-card" style="text-align:center;padding:64px 48px;">
+      <div style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dim),var(--accent-purple));margin:0 auto 32px;display:flex;align-items:center;justify-content:center;">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--text-primary);">JW</span>
+      </div>
+      <h4 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--text-primary);margin-bottom:8px;">Jack Williamson</h4>
+      <p class="vision-card-label" style="margin-bottom:24px;">Founder &amp; CEO</p>
+      <p style="font-size:13px;color:var(--text-dim);line-height:1.6;">Published Author &bull; Entertainment Executive &bull; Storytelling Advocate</p>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+<section class="genres">
+  <p class="section-label">Starting With</p>
+  <h2 class="section-title" style="max-width:500px;margin:0 auto 56px;">Stories that deserve to be <em>seen</em></h2>
+  <div class="genres-row">
+    <span class="genre-pill active">Romance</span>
+    <span class="genre-pill active">LGBT+</span>
+    <span class="genre-pill">Fantasy</span>
+    <span class="genre-pill">Thriller</span>
+    <span class="genre-pill">Historical Fiction</span>
+    <span class="genre-pill">Classic Literature</span>
+    <span class="genre-pill">Sci-Fi</span>
+  </div>
+</section>
+<div class="section-divider"></div>
+<section class="cta-section" id="contact">
+  <p class="section-label">Early Access</p>
+  <h2 class="section-title">Be part of <em>what's next</em></h2>
+  <p class="cta-body">We're building the future of screen storytelling. Authors, publishers, investors — if you believe every story deserves a screen, we want to hear from you.</p>
+  <div class="email-form">
+    <input type="email" placeholder="your@email.com">
+    <button type="submit">Join Waitlist</button>
+  </div>
+</section>
+<footer>
+  <span class="footer-logo">Reelized</span>
+  <ul class="footer-links">
+    <li><a href="mailto:hello@reelized.ai">hello@reelized.ai</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#authors">For Authors</a></li>
+    <li><a href="#audiences">For Audiences</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span class="footer-copy">&copy; 2026 Reelized</span>
+</footer>
+</body>
+</html>
